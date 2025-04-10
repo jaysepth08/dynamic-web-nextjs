@@ -8,6 +8,9 @@
 //     company: { name: string };
 //     address: { city: string; street: string };
 //   };
+
+import { ReactNode } from "react";
+
   
   // export interface User {
   //   id: number;
@@ -27,7 +30,7 @@
   // }
   
   export type User = {
-    company: any;
+    company: { name: string };
     phone: ReactNode;
     id: number;
     name: string;
