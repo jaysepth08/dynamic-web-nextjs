@@ -27,6 +27,8 @@
   // }
   
   export type User = {
+    company: any;
+    phone: ReactNode;
     id: number;
     name: string;
     username: string;
