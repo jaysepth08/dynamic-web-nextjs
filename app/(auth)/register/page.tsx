@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import maplibregl from "maplibre-gl";
+import Link from "next/link";
 
 const registrationSchema = z.object({
     firstName: z.string().min(2, "First name is required"),
@@ -64,7 +65,7 @@ export default function RegistrationForm() {
     }, [setValue]);
 
     return (
-        <section className="bg-gray-100">
+        <section className="bg-gray-50 dark:bg-gray-900">
             <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
                 <div className="max-w-2xl lg:max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-extrabold text-gray-900">Create Your Account</h2>
@@ -77,13 +78,13 @@ export default function RegistrationForm() {
                         <div className="rounded-lg overflow-hidden">
                             <div
                                 id="map"
-                                className="h-80 w-full rounded-md border border-gray-300 shadow"
+                                className="h-[400px] w-full rounded-md border border-gray-300 shadow"
                             />
                         </div>
 
                         {/* Form Section */}
                         <div className="bg-white p-6 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
                                 <div>
                                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                                     <input {...register("firstName")} className={inputClass} placeholder="John" />
@@ -160,6 +161,15 @@ export default function RegistrationForm() {
                                     <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                                         Login here
                                     </a>
+                                </p>
+                        
+                                <p className="mt-4 text-sm text-center">
+                                    <Link
+                                    href="/"
+                                    className="inline-block mt-4 mb-6 text-blue-600 hover:text-blue-800"
+                                >
+                                Go Home
+                                </Link>
                                 </p>
                             </form>
                         </div>

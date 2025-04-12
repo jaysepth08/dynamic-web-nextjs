@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import React from "react";
 import UsersNavbar from "../../components/users/UsersNavbar";
+import withAuth from '../../hoc/withAuth';
 
 
 type User = {
@@ -21,7 +22,7 @@ type Post = {
   body: string;
 };
 
-export default function RegularUserDashboard() {
+const RegularUserDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -149,3 +150,5 @@ export default function RegularUserDashboard() {
     </>
   );
 }
+
+export default withAuth(RegularUserDashboard);

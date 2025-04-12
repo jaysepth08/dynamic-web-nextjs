@@ -8,6 +8,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 // import { NavUser } from "@/components/nav-user" 
 import { AdminPostListsCards } from "../../components/admin/AdminPostListCards"
+import withAuth from '../../hoc/withAuth';
 
 import {
   Breadcrumb,
@@ -22,7 +23,7 @@ import {
   SidebarInset
 } from "@/components/ui/sidebar"
 
-export default function AdminDashboard() {
+const AdminDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -79,3 +80,5 @@ export default function AdminDashboard() {
   );
 
 }
+
+export default withAuth(AdminDashboard);
