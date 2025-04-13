@@ -65,13 +65,13 @@ export const Navbar = () => {
               </Link>
               <Link
                 href="/login"
-                className="block py-2 mt-2 text-white bg-indigo-600 text-center rounded-md"
+                className="block py-2 mt-2 text-white bg-indigo-600 hover:bg-gray-500 text-center rounded-md"
               >
                 Log in
               </Link>
               <Link
                 href="/register"
-                className="block py-2 mt-2 text-white bg-gray-700 text-center rounded-md"
+                className="block py-2 mt-2 text-white bg-gray-700 hover:bg-gray-500 text-center rounded-md"
               >
                 Register
               </Link>
@@ -97,13 +97,13 @@ export const Navbar = () => {
           <div className="hidden lg:flex lg:items-center lg:space-x-6">
           <Link
               href="/login"
-              className="text-sm text-white bg-indigo-600 hover:bg-indigo-700 font-medium rounded-lg px-4 py-2 ml-4"
+              className="text-sm text-white bg-indigo-600 hover:bg-gray-800 font-medium rounded-lg px-4 py-2 ml-4"
             >
               Log in
             </Link>
             <Link
               href="/register"
-              className="text-sm text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg px-4 py-2"
+              className="text-sm text-white bg-gray-700 hover:bg-indigo-700 font-medium rounded-lg px-4 py-2"
             >
               Register
             </Link>
