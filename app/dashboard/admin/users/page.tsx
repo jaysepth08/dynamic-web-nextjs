@@ -1,6 +1,6 @@
-
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUsers } from "../../../lib/api";
 import { User } from "../../../types/user";
@@ -27,6 +27,14 @@ export default function HomePage() {
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.address.city.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (isLoading)
     return (
@@ -75,11 +83,22 @@ export default function HomePage() {
         <div className="w-full">
 
           <h1 className="text-4xl font-extrabold text-blue-600 inline-block">
-            📋 User List
+            User List
           </h1>
           <p className="text-gray-600 mt-2">
             View user details with their contact information.
           </p>
+
+          {/* Search Input */}
+          <div className="my-4">
+            <input
+              type="text"
+              placeholder="Search by name, username or city..."
+              className="w-full max-w-md px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
           {/* Users List */}
           <div className="overflow-x-auto bg-white shadow-lg rounded-lg w-full">
@@ -101,34 +120,42 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {user.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      @{user.username}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {user.address.city}, {user.address.street}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
-                      <Link
-                        href={`/dashboard/admin/users/${user.id}`}
-                        className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                      >
-                        View Profile
-                      </Link>
+                {filteredUsers.length > 0 ? (
+                  filteredUsers.map((user) => (
+                    <tr key={user.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        {user.name}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        @{user.username}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {user.address.city}, {user.address.street}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
+                        <Link
+                          href={`/dashboard/admin/users/${user.id}`}
+                          className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                        >
+                          View Profile
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={4} className="text-center text-gray-500 py-4">
+                      No users found.
                     </td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
 
           {/* Map Visualization */}
           <div className="bg-muted/50 min-h-[100vh] flex-1 mb-8 rounded-xl md:min-h-min w-full" >
-            <UserMap users={users} />
+            <UserMap users={filteredUsers} />
           </div>
         </div>
       </SidebarInset>

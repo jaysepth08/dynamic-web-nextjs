@@ -7,8 +7,6 @@ import UsersNavbar from "../../../../components/users/UsersNavbar";
 // import withAuth from '../../../../hoc/withAuth';
 
 
-
-// Types
 type Post = {
   userId: number;
   id: number;
