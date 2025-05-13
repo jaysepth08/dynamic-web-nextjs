@@ -8,7 +8,7 @@ interface AboutProps {
 
 export const About = ({ id }: AboutProps) => {
   return (
-    <section className="dark:bg-gray-900" id={id || "about"}>
+    <section id={id || "about"}>
       {" "}
       <div className="sm:flex items-center max-w-screen-xl mx-auto px-4 py-12">
         <div className="sm:w-1/2 p-10">

@@ -1,4 +1,3 @@
-
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -6,17 +5,17 @@ import React, { ReactNode, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogOut } from "lucide-react";
+import { Darkmode } from "../Darkmode";
 
 type NavbarUserProps = {
-    user: {
-      avatar: string | undefined; 
-      id: string;
-      name: string;
-      email: string;
-    };
-    children?: ReactNode;
+  user: {
+    avatar: string | undefined;
+    id: string;
+    name: string;
+    email: string;
+  };
+  children?: ReactNode;
 };
-  
 
 const UsersNavbar = ({ user, children }: NavbarUserProps) => {
   const router = useRouter();
@@ -42,7 +41,7 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                 aria-expanded={menuOpen}
               >
                 <span className="sr-only">Open main menu</span>
-              
+
                 <svg
                   className={`${menuOpen ? "hidden" : "block"} h-6 w-6`}
                   fill="none"
@@ -56,7 +55,7 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                   />
                 </svg>
-                
+
                 <svg
                   className={`${menuOpen ? "block" : "hidden"} h-6 w-6`}
                   fill="none"
@@ -114,7 +113,6 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
 
             {/* Profile dropdown */}
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-             
               <div className="relative ml-3">
                 <button
                   type="button"
@@ -132,7 +130,9 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                 {menuOpen && (
                   <div className="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg py-2 ring-1 ring-black ring-opacity-5">
                     <div className="px-4 py-2 border-b border-gray-200">
-                      <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                      <p className="text-sm font-medium text-gray-900">
+                        {user.name}
+                      </p>
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                     <Link
@@ -142,6 +142,7 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                     >
                       See My Profile
                     </Link>
+
                     <button
                       onClick={handleLogout}
                       className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -154,6 +155,9 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                   </div>
                 )}
               </div>
+            </div>
+            <div className="hidden sm:block ml-6">
+              <Darkmode />
             </div>
           </div>
         </div>

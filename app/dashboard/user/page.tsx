@@ -7,6 +7,7 @@ import UsersNavbar from "../../components/users/UsersNavbar";
 import { Team } from "../../components/users/Team";
 import { About } from "../../components/users/About";
 import { Contact } from "../../components/users/Contact";
+import { Footer } from "../../components/Footer";
 import withAuth from "../../hoc/withAuth";
 
 type User = {
@@ -45,7 +46,7 @@ const RegularUserDashboard = () => {
 
       const userPosts = data.filter((post) => post.userId === user.id);
 
-      // Check if there's a new post in localStorage
+      // Check if there is a new post in localStorage
       const newPost = localStorage.getItem("newPost");
       if (newPost) {
         const parsedPost = JSON.parse(newPost);
@@ -187,6 +188,7 @@ const RegularUserDashboard = () => {
           <Contact />
         </div>
       </UsersNavbar>
+      <Footer />
     </>
   );
 };
