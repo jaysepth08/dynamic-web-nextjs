@@ -14,8 +14,9 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import withAuth from "../hoc/withAuth";
 
-export default function Page() {
+const UserDashboard = () => {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -54,3 +55,5 @@ export default function Page() {
     </SidebarProvider>
   )
 }
+
+export default withAuth(UserDashboard);

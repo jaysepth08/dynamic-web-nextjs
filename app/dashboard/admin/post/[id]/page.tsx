@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Separator } from "@/components/ui/separator"
 import { SidebarInset } from "@/components/ui/sidebar"
+import withAuth from "../../../../hoc/withAuth";
 
-// Types
 type Post = {
   userId: number;
   id: number;
@@ -38,7 +38,7 @@ type Comment = {
   body: string;
 };
 
-export default function PostDetail() {
+const PostDetail = () => {
   const { id } = useParams();
   const [user] = useState(() => {
     if (typeof window !== "undefined") {
@@ -101,7 +101,7 @@ export default function PostDetail() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <BreadcrumbPage>Post Details & Comments</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -112,23 +112,23 @@ export default function PostDetail() {
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-blue-700 mb-2">{post.title}</h1>
             {author && (
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-gray-600 dark:text-white mb-2">
                 Posted by <span className="font-medium">{author.name}</span> (@{author.username})
               </p>
             )}
-            <p className="text-gray-800">{post.body}</p>
+            <p className="text-gray-800 dark:text-white">{post.body}</p>
           </div>
 
           <div>
             <h2 className="text-2xl font-semibold mb-4">🗨️ Comments</h2>
             {comments.length === 0 ? (
-              <p className="text-gray-500 italic">No comments found.</p>
+              <p className="text-gray-500 dark:text-white italic">No comments found.</p>
             ) : (
               <ul className="space-y-4">
                 {comments.map((comment) => (
                   <li key={comment.id} className="border p-4 rounded shadow-sm">
-                    <p className="font-medium">{comment.name} ({comment.email})</p>
-                    <p className="text-gray-700">{comment.body}</p>
+                    <p className="font-medium dark:text-white">{comment.name} ({comment.email})</p>
+                    <p className="text-gray-700 dark:text-white">{comment.body}</p>
                   </li>
                 ))}
               </ul>
@@ -139,3 +139,5 @@ export default function PostDetail() {
     </SidebarProvider>
   );
 }
+
+export default withAuth(PostDetail);

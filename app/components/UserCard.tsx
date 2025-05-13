@@ -7,6 +7,7 @@ type UserCardProps = {
 
 export const UserCard = ({ user }: UserCardProps) => {
   return (
+    <>
     <section className="w-full">
       <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
 
@@ -29,6 +30,8 @@ export const UserCard = ({ user }: UserCardProps) => {
         </div>
       </div>
     </section>
+    
+    </>
   );
 };
 

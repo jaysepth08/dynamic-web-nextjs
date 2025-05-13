@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UsersNavbar from "./../../../../components/users/UsersNavbar";
-
+import withAuth from "../../../../hoc/withAuth";
 
 // Define the User type based on your structure
 type User = {
@@ -15,7 +15,7 @@ type User = {
   avatar?: string;
 };
 
-export default function CreatePostPage() {
+const CreatePostPage = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [user, setUser] = useState<User | null>(null);
@@ -113,3 +113,5 @@ export default function CreatePostPage() {
     </UsersNavbar>
   );
 }
+
+export default withAuth(CreatePostPage);

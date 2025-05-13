@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardDescription, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, FileText, MessageCircle } from "lucide-react"
 
 export function AdminPostListsCards() {
@@ -31,33 +31,33 @@ export function AdminPostListsCards() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-6">
-      <Card className="mx-8">
+      <Card className="mx-8 dark:bg-gray-700">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+          <CardDescription>Total Users</CardDescription>
           <Users className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{totalUsers}</div>
+          <CardTitle className="text-2xl font-bold">{totalUsers}</CardTitle>
         </CardContent>
       </Card>
 
-      <Card className="mx-8">
+      <Card className="mx-8 dark:bg-gray-700">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Posts</CardTitle>
+          <CardDescription>Total Posts</CardDescription>
           <FileText className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{totalPosts}</div>
+          <CardTitle className="text-2xl font-bold">{totalPosts}</CardTitle>
         </CardContent>
       </Card>
 
-      <Card className="mx-8">
+      <Card className="mx-8 dark:bg-gray-700">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Total Comments</CardTitle>
+          <CardDescription>Total Comments</CardDescription>
           <MessageCircle className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{totalComments}</div>
+          <CardTitle className="text-2xl font-bold">{totalComments}</CardTitle>
         </CardContent>
       </Card>
     </div>

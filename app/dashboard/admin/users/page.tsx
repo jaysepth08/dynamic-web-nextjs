@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
@@ -6,8 +5,8 @@ import { fetchUsers } from "../../../lib/api";
 import { User } from "../../../types/user";
 import Link from "next/link";
 import UserMap from "../../../components/UserMap";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,15 +14,18 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset
-} from "@/components/ui/sidebar"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { SidebarInset } from "@/components/ui/sidebar";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import withAuth from "../../../hoc/withAuth";
 
-
-export default function HomePage() {
-  const { data: users = [], error, isLoading } = useQuery<User[]>({
+const UsersList = () => {
+  const {
+    data: users = [],
+    error,
+    isLoading,
+  } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: fetchUsers,
   });
@@ -66,73 +68,52 @@ export default function HomePage() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <BreadcrumbPage>List of Users</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
         <div className="w-full">
-
-          <h1 className="text-4xl font-extrabold text-blue-600 inline-block">
-            📋 User List
+          <h1 className="text-2xl font-extrabold text-blue-600 inline-block">
+           List of users
           </h1>
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 dark:text-white mt-2">
             View user details with their contact information.
           </p>
 
-          {/* Users List */}
-          <div className="overflow-x-auto bg-white shadow-lg rounded-lg w-full">
-            <table className="table-auto divide-y divide-gray-200 w-full">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                    Username
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">
-                    Address
-                  </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-600 uppercase tracking-wider">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {users.map((user) => (
-                  <tr key={user.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {user.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      @{user.username}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {user.address.city}, {user.address.street}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm">
-                      <Link
-                        href={`/dashboard/admin/users/${user.id}`}
-                        className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                      >
-                        View Profile
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+            {users.map((user) => (
+              <Card key={user.id} className="shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-blue-600">{user.name}</CardTitle>
+                  <p className="text-sm text-gray-500">@{user.username}</p>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-gray-700 dark:text-white">
+                    <strong>City:</strong> {user.address.city}
+                  </p>
+                  <p className="text-gray-700 dark:text-white">
+                    <strong>Street:</strong> {user.address.street}
+                  </p>
+                  <Link
+                    href={`/dashboard/admin/users/${user.id}`}
+                    className="inline-block mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  >
+                    View Profile
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-
-          {/* Map Visualization */}
-          <div className="bg-muted/50 min-h-[100vh] flex-1 mb-8 rounded-xl md:min-h-min w-full" >
+          <Separator className="my-6" />
+          <div className="bg-muted/50 min-h-[100vh] flex-1 mb-8 rounded-xl md:min-h-min w-full">
             <UserMap users={users} />
           </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
-
   );
 }
+
+export default withAuth(UsersList);

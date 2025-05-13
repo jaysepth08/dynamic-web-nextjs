@@ -2,21 +2,17 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  Command,
-  GalleryVerticalEnd,
-  Home,
-  Settings2,
+  LayoutDashboardIcon,
+  ListIcon,
+  UsersIcon,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
-import { TeamSwitcher } from "@/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
 
@@ -27,78 +23,36 @@ type User = {
   avatar?: string
 }
 
-// This is sample data.
 const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
+
+  
   navMain: [
     {
       title: "Pages",
       url: "/dashboard/admin",
       isActive: true,
+      icon: LayoutDashboardIcon,
+      
       items: [
         {
           title: "Home",
           url: "/dashboard/admin",
-          icon: Home,
+          icon: LayoutDashboardIcon,
         },
         {
           title: "Users Lists",
-          // url: "/users",
           url: "/dashboard/admin/users",
+          icon: UsersIcon,
         },
         {
           title: "Posts Lists",
-          // url: "/dashboard/post",
           url: "/dashboard/admin/post",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          icon: ListIcon,
         },
       ],
     },
@@ -119,9 +73,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+      {/* <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
-      </SidebarHeader>
+      </SidebarHeader> */}
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
@@ -135,6 +89,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 name: user.name,
                 email: user.email,
                 avatar: user.avatar ?? "/default-avatar.png",
+                id: "default-id", // Replace with a valid id if available
               }}
             />
           )}

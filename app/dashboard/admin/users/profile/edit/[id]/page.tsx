@@ -2,8 +2,8 @@
 
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import UsersNavbar from "../../../../../components/users/UsersNavbar";
-import withAuth from "../../../../../hoc/withAuth";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 type User = {
   id: number;
@@ -20,7 +20,7 @@ type UserProfile = {
   bio: string;
 };
 
-const EditProfilePage = () => {
+export default function EditProfilePage() {
   const [user] = useState(() => {
     if (typeof window !== "undefined") {
       return JSON.parse(localStorage.getItem("user") || "null");
@@ -58,15 +58,10 @@ const EditProfilePage = () => {
 
   return (
     <>
-      <UsersNavbar
-        user={{
-          id: user.id.toString(),
-          avatar: user.avatar || "/default-avatar.png",
-          name: user.name,
-          email: user.email,
-        }}
-      >
-        <div className="py-6 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <SidebarProvider>
+          <SidebarTrigger className="hidden sm:flex" />
+          <AppSidebar  />
+        <div className="py-6 px-4 sm:px-6 lg:px-8 bg-gray-50 w-full min-h-screen">
           <div className="max-w-7xl mx-auto bg-white p-8 rounded-lg shadow-lg">
             <h1 className="text-3xl font-semibold">Edit Profile</h1>
 
@@ -120,9 +115,7 @@ const EditProfilePage = () => {
             </form>
           </div>
         </div>
-      </UsersNavbar>
+      </SidebarProvider>
     </>
   );
 }
-
-export default withAuth(EditProfilePage);

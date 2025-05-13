@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Types
+
 type User = {
   id: number;
   name: string;

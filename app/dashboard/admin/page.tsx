@@ -1,14 +1,12 @@
-
 "use client";
 
 import React, { useEffect, useState } from "react";
 import { User } from "../../types/user";
 import AdminCharts from "../../components/AdminCharts";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
-// import { NavUser } from "@/components/nav-user" 
-import { AdminPostListsCards } from "../../components/admin/AdminPostListCards"
-import withAuth from '../../hoc/withAuth';
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { AdminPostListsCards } from "../../components/admin/AdminPostListCards";
+import withAuth from "../../hoc/withAuth";
 
 import {
   Breadcrumb,
@@ -17,11 +15,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Separator } from "@/components/ui/separator"
-import {
-  SidebarInset
-} from "@/components/ui/sidebar"
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import { SidebarInset } from "@/components/ui/sidebar";
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -34,13 +30,10 @@ const AdminDashboard = () => {
     }
   }, []);
 
-
-
   if (!user) return <p>Loading...</p>;
 
   return (
     <div>
-
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
@@ -54,31 +47,24 @@ const AdminDashboard = () => {
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">
-                      Admin Dashboard
-                    </BreadcrumbLink>
+                    <BreadcrumbLink href="#">Admin Dashboard</BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbSeparator className="hidden md:block" />
                   <BreadcrumbItem>
-                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                    <BreadcrumbPage>Data Visualizations</BreadcrumbPage>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
           </header>
-          <div>
-            <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min">
-              <div>
-                <AdminPostListsCards />
-              </div>
-              <AdminCharts />
-            </div>
-          </div>
+          <AdminPostListsCards />
+          <Separator className="my-4" />
+          <div className="p-6"><AdminCharts /></div>
+          
         </SidebarInset>
       </SidebarProvider>
     </div>
   );
-
-}
+};
 
 export default withAuth(AdminDashboard);

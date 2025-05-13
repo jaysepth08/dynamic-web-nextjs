@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import UsersNavbar from "../../../../../components/users/UsersNavbar";
+import withAuth from "../../../../../hoc/withAuth";
 
 type Post = {
   userId: number;
@@ -11,7 +12,7 @@ type Post = {
   body: string;
 };
 
-export default function EditPostPage() {
+const EditPostPage = () => {
   const { id } = useParams();
   const router = useRouter();
   const [user] = useState(() => {
@@ -128,3 +129,5 @@ export default function EditPostPage() {
     </UsersNavbar>
   );
 }
+
+export default withAuth(EditPostPage);
