@@ -102,6 +102,12 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                   >
                     About Us
                   </Link>
+                  <Link
+                    href="#contact"
+                    className="text-gray-700 dark:text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Contact Us
+                  </Link>
                 </div>
               </div>
             </div>
@@ -130,7 +136,8 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                     <Link
-                      href={`/dashboard/user/profile/${user.id}`}
+                      href="/dashboard/user/profile/[profileId]"
+                      as={`/dashboard/user/profile/${user.id}`}
                       className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 font-medium"
                     >
                       See My Profile
