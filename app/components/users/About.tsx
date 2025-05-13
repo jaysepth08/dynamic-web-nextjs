@@ -1,8 +1,9 @@
 
 import React from "react";
+import Image from "next/image";
 
 interface AboutProps {
-  id?: string; // Keep the prop if you need it
+  id?: string; 
 }
 
 export const About = ({ id }: AboutProps) => {
@@ -12,11 +13,11 @@ export const About = ({ id }: AboutProps) => {
       <div className="sm:flex items-center max-w-screen-xl mx-auto px-4 py-12">
         <div className="sm:w-1/2 p-10">
           <div className="image object-center text-center">
-            <img
+            <Image
               src="/images/about-us-illustration.png"
               alt="About us"
               className="w-full h-auto"
-              width={500}
+              width={500} 
               height={300}
             />
           </div>
