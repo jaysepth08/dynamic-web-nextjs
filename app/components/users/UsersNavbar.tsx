@@ -130,8 +130,12 @@ const UsersNavbar = ({ user, children }: NavbarUserProps) => {
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                     <Link
+<<<<<<< HEAD
                       href="/dashboard/user/profile/[profileId]"
                       as={`/dashboard/user/profile/${user.id}`}
+=======
+                      href={`/dashboard/user/profile/${user.id}`}
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
                       className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 font-medium"
                     >
                       See My Profile

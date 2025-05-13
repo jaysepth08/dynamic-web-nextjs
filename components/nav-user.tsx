@@ -1,7 +1,16 @@
 "use client";
 
+<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 import { ChevronsUpDown, LogOut } from "lucide-react";
+=======
+import { useRouter } from "next/navigation"
+import {
+  BadgeCheck,
+  ChevronsUpDown,
+  LogOut,
+} from "lucide-react"
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -25,12 +34,21 @@ import { useTheme } from "next-themes";
 
 type NavUserProps = {
   user: {
+<<<<<<< HEAD
     name: string;
     email: string;
     avatar?: string;
     id: string;
   };
 };
+=======
+    name: string
+    email: string
+    avatar?: string
+  }
+}
+
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
 
 export function NavUser({ user }: NavUserProps) {
   const { isMobile } = useSidebar();
@@ -101,6 +119,7 @@ export function NavUser({ user }: NavUserProps) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+<<<<<<< HEAD
             {/* <DropdownMenuItem asChild>
               <Link
                 href="/dashboard/admin/users/profile/[id]"
@@ -121,6 +140,15 @@ export function NavUser({ user }: NavUserProps) {
               <Moon className="mr-2 h-4 w-4" />
               Dark Mode
             </DropdownMenuItem>
+=======
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <BadgeCheck />
+                Account
+              </DropdownMenuItem>
+             
+            </DropdownMenuGroup>
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut />

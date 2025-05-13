@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+<<<<<<< HEAD
 import UsersNavbar from "../../../../components/users/UsersNavbar";
 import withAuth from "../../../../hoc/withAuth";
 
@@ -13,6 +14,13 @@ type User = {
 };
 
 // types...
+=======
+import React from "react";
+import UsersNavbar from "../../../../components/users/UsersNavbar";
+// import withAuth from '../../../../hoc/withAuth';
+
+
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
 type Post = {
   userId: number;
   id: number;
@@ -28,7 +36,11 @@ type Comment = {
   body: string;
 };
 
+<<<<<<< HEAD
 const PostDetail = () => {
+=======
+export default function PostDetail() {
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
   const { id } = useParams();
   const [user] = useState(() => {
     if (typeof window !== "undefined") {
@@ -46,6 +58,10 @@ const PostDetail = () => {
       const postRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
       const postData = await postRes.json();
 
+<<<<<<< HEAD
+=======
+      // If not admin, only allow own posts
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
       if (user?.email !== "admin@admin.com" && user?.id !== postData.userId) {
         setPost(null);
         setLoading(false);
@@ -65,6 +81,7 @@ const PostDetail = () => {
   }, [id, user]);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
+<<<<<<< HEAD
   if (!post) return <p className="text-center text-red-500 mt-10">You do not have access to this post.</p>;
 
   return (
@@ -78,6 +95,19 @@ const PostDetail = () => {
       >
        
 
+=======
+
+  if (!post) return <p className="text-center text-red-500 mt-10">You do not have access to this post.</p>;
+
+  return (
+      <><UsersNavbar
+            user={{
+              ...user,
+              id: user.id.toString(),
+              avatar: user.avatar || "/default-avatar.png",
+            }}
+          >
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
     <div className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
       <p className="text-gray-700 mb-6">{post.body}</p>
@@ -92,6 +122,7 @@ const PostDetail = () => {
         ))}
       </ul>
     </div>
+<<<<<<< HEAD
     
     </UsersNavbar>
     </>
@@ -99,3 +130,8 @@ const PostDetail = () => {
 }
 
 export default withAuth(PostDetail);
+=======
+    </UsersNavbar></>
+  );
+}
+>>>>>>> 091a7675764d95df6d61fb8f3d707cbf450fc137
