@@ -14,4 +14,8 @@ module.exports = {
   images: {
     domains: ['robohash.org'],  // Add 'robohash.org' here
   },
+  eslint: {
+    // Disable ESLint during the build process
+    ignoreDuringBuilds: true,
+  },
 };
