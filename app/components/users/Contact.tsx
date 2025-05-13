@@ -7,7 +7,8 @@ interface ContactProps {
 
 export const Contact = ({ id }: ContactProps) => {
   return (
-    <section className="bg-white dark:bg-gray-900" id="contact">
+    <section className="bg-white dark:bg-gray-900" id={id || "contact"}>
+      {" "}
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-xl grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* <!-- Embedded Map --> */}
         <div className="w-full h-100 rounded-lg overflow-hidden shadow-lg">

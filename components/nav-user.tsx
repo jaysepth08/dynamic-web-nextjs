@@ -50,7 +50,6 @@ export function NavUser({ user }: NavUserProps) {
   };
 
   const { setTheme } = useTheme();
-  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <SidebarMenu>
@@ -122,4 +121,5 @@ export function NavUser({ user }: NavUserProps) {
     </SidebarMenu>
   );
 }
+
 export default NavUser;

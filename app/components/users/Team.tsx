@@ -7,7 +7,8 @@ interface TeamProps {
 
 export const Team = ({ id }: TeamProps) => {
   return (
-    <section className="bg-white dark:bg-gray-900 h-auto" id="team">
+    <section className="bg-white dark:bg-gray-900 h-auto" id={id || "team"}>
+      {" "}
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
           <span className="text-4xl text-gray-700 dark:text-white border-b-2 border-indigo-600 tracking-tight font-extrabold">

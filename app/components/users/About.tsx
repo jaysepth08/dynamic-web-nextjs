@@ -1,13 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
+
 import React from "react";
 
 interface AboutProps {
-  id?: string;
+  id?: string; // Keep the prop if you need it
 }
 
 export const About = ({ id }: AboutProps) => {
   return (
-    <section className="dark:bg-gray-900" id="about">
+    <section className="dark:bg-gray-900" id={id || "about"}>
+      {" "}
       <div className="sm:flex items-center max-w-screen-xl mx-auto px-4 py-12">
         <div className="sm:w-1/2 p-10">
           <div className="image object-center text-center">
@@ -22,10 +23,9 @@ export const About = ({ id }: AboutProps) => {
         </div>
         <div className="sm:w-1/2 p-5">
           <div className="text">
-            <span className="text-4xl text-gray-700 dark:text-white border-b-2 border-indigo-600 uppercase tracking-tight font-extrabold">
+            <span className="text-4xl text-gray-700 dark:text-white border-b-2 border-indigo-600 tracking-tight font-extrabold">
               About us
             </span>
-            {/* <h2 className="mb-4 text-4xl border-indigo-600 tracking-tight font-extrabold text-gray-900 dark:text-white">About us</h2> */}
             <h2 className="my-4 font-bold text-3sm sm:text-4sm text-gray-700 dark:text-white">
               Dynamic Web Application using{" "}
               <span className="text-indigo-600">Next.js and Tailwind CSS</span>
@@ -46,7 +46,7 @@ export const About = ({ id }: AboutProps) => {
               using multiple data fetching methods including TanStack Query and
               Axios.
             </p>
-              <br />
+
             <h5 className="text-gray-700 dark:text-white font-semibold">
               Features
             </h5>

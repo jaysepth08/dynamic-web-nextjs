@@ -12,14 +12,6 @@ type User = {
   avatar?: string;
 };
 
-type UserProfile = {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-  bio: string;
-};
-
 const EditProfilePage = () => {
   const [user] = useState(() => {
     if (typeof window !== "undefined") {
@@ -29,7 +21,6 @@ const EditProfilePage = () => {
   });
 
   const { id } = useParams();
-  const [userProfile] = useState<UserProfile | null>(null);
   const [userData, setUserData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -123,6 +114,6 @@ const EditProfilePage = () => {
       </UsersNavbar>
     </>
   );
-}
+};
 
 export default withAuth(EditProfilePage);

@@ -5,7 +5,7 @@ import { Team } from "./components/users/Team";
 import { About } from "./components/users/About";
 import { Contact } from "./components/users/Contact";
 
-export default function Home({ searchParams }: { searchParams?: any }) {
+export default function Home() {
   return (
     <>
       <Navbar />
