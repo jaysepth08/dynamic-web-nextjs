@@ -14,6 +14,7 @@ type User = {
   id: number;
   name: string;
   email: string;
+  role: "admin" | "user";
   avatar?: string;
 };
 
@@ -29,7 +30,6 @@ const RegularUserDashboard = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch user data from localStorage
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -46,7 +46,6 @@ const RegularUserDashboard = () => {
 
       const userPosts = data.filter((post) => post.userId === user.id);
 
-      // Check if there is a new post in localStorage
       const newPost = localStorage.getItem("newPost");
       if (newPost) {
         const parsedPost = JSON.parse(newPost);
@@ -193,4 +192,4 @@ const RegularUserDashboard = () => {
   );
 };
 
-export default withAuth(RegularUserDashboard);
+export default withAuth(RegularUserDashboard, ["user"]); // Only user role can access this page
