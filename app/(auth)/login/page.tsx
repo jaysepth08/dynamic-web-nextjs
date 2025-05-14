@@ -251,11 +251,8 @@ async function loginUser(email: string, password: string): Promise<LoginResult> 
   }
 }
 
-interface LoginFormProps {
-  className?: string;
-}
 
-export default function LoginForm({ className }: LoginFormProps) {
+export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -291,7 +288,7 @@ export default function LoginForm({ className }: LoginFormProps) {
       <div className="max-w-md w-full bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md mt-10">
         <form
           onSubmit={handleLogin}
-          className={cn("flex flex-col gap-6 max-w-md w-full mx-auto", className)}
+          className={cn("flex flex-col gap-6 max-w-md w-full mx-auto")}
         >
           <div className="text-center space-y-1">
             <h1 className="text-2xl font-bold">Login to your account</h1>
