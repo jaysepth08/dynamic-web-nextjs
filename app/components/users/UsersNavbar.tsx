@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+
 "use client";
 
 import React, { ReactNode, useState } from "react";
@@ -19,175 +19,189 @@ type NavbarUserProps = {
 
 const UsersNavbar = ({ user, children }: NavbarUserProps) => {
   const router = useRouter();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     router.push("/");
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    if (isProfileOpen) setIsProfileOpen(false);
+  };
+
+  const toggleProfile = () => {
+    setIsProfileOpen(!isProfileOpen);
+    if (isMenuOpen) setIsMenuOpen(false);
+  };
+
   return (
     <>
-      <nav className="bg-white dark:bg-gray-900 sticky top-0 z-10 shadow-md">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            {/* Mobile menu toggle */}
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button
-                type="button"
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                aria-controls="mobile-menu"
-                aria-expanded={menuOpen}
-              >
-                <span className="sr-only">Open main menu</span>
+      <nav className="bg-sky-200 border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          
+          <Link href="/" className="flex items-center">
+            {/* logo here */}
+          </Link>
 
-                <svg
-                  className={`${menuOpen ? "hidden" : "block"} h-6 w-6`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-
-                <svg
-                  className={`${menuOpen ? "block" : "hidden"} h-6 w-6`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            {/* Logo and links */}
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex shrink-0 items-center">
-                {/* <img
-                  className="h-8 w-auto"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
-                /> */}
+          {/* Mobile Menu Button */}
+          <div className="flex items-center lg:hidden">
+            <Darkmode />
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center p-2 ml-1 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu"
+              aria-expanded={isMenuOpen}
+            >
+              <span className="sr-only">Open main menu</span>
+              <div className="relative w-6 h-5">
+                <span className={`absolute w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transform transition duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2.5' : ''}`}></span>
+                <span className={`absolute w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transform transition duration-300 translate-y-2 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+                <span className={`absolute w-6 h-0.5 bg-gray-600 dark:bg-gray-300 transform transition duration-300 translate-y-4 ${isMenuOpen ? '-rotate-45 -translate-y-0.5' : ''}`}></span>
               </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <Link
-                    href="/dashboard/user"
-                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="#team"
-                    className="text-gray-700 dark:text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Team
-                  </Link>
-                  <Link
-                    href="#about"
-                    className="text-gray-700 dark:text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    About Us
-                  </Link>
-                  <Link
-                    href="#contact"
-                    className="text-gray-700 dark:text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Profile dropdown */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="relative ml-3">
-                <button
-                  type="button"
-                  className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  onClick={() => setMenuOpen(!menuOpen)}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src={user.avatar ?? "/default-avatar.png"}
-                    alt={user.name}
-                  />
-                </button>
-
-                {menuOpen && (
-                  <div className="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white shadow-lg py-2 ring-1 ring-black ring-opacity-5">
-                    <div className="px-4 py-2 border-b border-gray-200">
-                      <p className="text-sm font-medium text-gray-900">
-                        {user.name}
-                      </p>
-                      <p className="text-xs text-gray-500">{user.email}</p>
-                    </div>
-                    <Link
-                      href="/dashboard/user/profile/[profileId]"
-                      as={`/dashboard/user/profile/${user.id}`}
-                      className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 font-medium"
-                    >
-                      See My Profile
-                    </Link>
-
-                    <button
-                      onClick={handleLogout}
-                      className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <div className="flex items-center gap-2">
-                        <LogOut className="h-4 w-4" />
-                        Sign out
-                      </div>
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="hidden sm:block ml-6">
-              <Darkmode />
-            </div>
+            </button>
           </div>
-        </div>
 
-        {/* Mobile menu links */}
-        {menuOpen && (
-          <div className="sm:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pt-2 pb-3">
+          {/* Mobile Menus Links */}
+          <div className={`${isMenuOpen ? 'block' : 'hidden'} w-full lg:hidden`}>
+            <div className="flex flex-col mt-4 space-y-4">
               <Link
                 href="/dashboard/user"
-                className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Dashboard
               </Link>
               <Link
-                href="/team"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                href="#team"
+                className="px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Team
               </Link>
               <Link
-                href="/about"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                href="#about"
+                className="px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
+              <Link
+                href="#contact"
+                className="px-4 py-2 text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              
+              {/* Mobile Profile Section */}
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                <div className="flex items-center space-x-3 px-4">
+                  <img
+                    src={user.avatar ?? "/default-avatar.png"}
+                    alt={user.name}
+                    className="h-10 w-10 rounded-full"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 dark:text-white">{user.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                  </div>
+                </div>
+                <div className="mt-3 space-y-2">
+                  <Link
+                    href={`/dashboard/user/profile/${user.id}`}
+                    className="block px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    See My Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        )}
+
+          {/* Desktop Menus Links */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-6">
+            <Link
+              href="/dashboard/user"
+              className="text-gray-700 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400"
+            >
+              <span className="border-b-2 border-indigo-600 tracking-tight font-extrabold">
+                Dashboard
+              </span>
+            </Link>
+            <Link
+              href="#team"
+              className="text-gray-700 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400"
+            >
+              Team
+            </Link>
+            <Link
+              href="#about"
+              className="text-gray-700 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400"
+            >
+              About
+            </Link>
+            <Link
+              href="#contact"
+              className="text-gray-700 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400"
+            >
+              Contact
+            </Link>
+          </div>
+
+          {/* Desktop Profile & Dark Mode */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-3">
+            <Darkmode />
+            <div className="relative">
+              <button
+                onClick={toggleProfile}
+                className="flex items-center space-x-3 focus:outline-none"
+              >
+                <img
+                  src={user.avatar ?? "/default-avatar.png"}
+                  alt={user.name}
+                  className="h-8 w-8 rounded-full"
+                />
+              </button>
+
+              {/* Desktop Profile Dropdown */}
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5">
+                  <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-600">
+                    <p className="text-sm font-medium text-gray-700 dark:text-white">{user.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                  </div>
+                  <Link
+                    href={`/dashboard/user/profile/${user.id}`}
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600"
+                    onClick={() => setIsProfileOpen(false)}
+                  >
+                    See My Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </nav>
+
       <main>{children}</main>
     </>
   );

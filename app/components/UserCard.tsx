@@ -9,7 +9,7 @@ export const UserCard = ({ user }: UserCardProps) => {
   return (
     <>
     <section className="w-full">
-      <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+      <div className="bg-white hover:bg-gray p-4 rounded-lg shadow-md border border-gray-200">
 
         <h2 className="text-lg font-semibold">{user.name}</h2>
         <p className="text-gray-500">{user.company.name}</p>
